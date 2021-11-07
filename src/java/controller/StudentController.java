@@ -1,8 +1,8 @@
 package java.controller;
 
-import com.domain.Course;
-import com.domain.Student;
-import com.repository.StudentInMemoryRepo;
+import java.model.Kurs;
+import java.model.Student;
+import java.repository.StudentInMemoryRepo;
 
 /**
  * @author sncam
@@ -26,11 +26,11 @@ public class StudentController {
     /**
      *
      * @param studentId id of the student
-     * @param course object course
+     * @param kurs object course
      * @return true or false if the course was added to the student or not
      */
-    public Boolean addCourseToStudent(Long studentId, Course course) {
-        Student updatedStudent = this.repository.addCourseToStudent(studentId,course);
+    public Boolean addKursToStudent(Long studentId, Kurs kurs) {
+        Student updatedStudent = this.repository.addKursToStudent(studentId, kurs);
         return updatedStudent!=null;
     }
 

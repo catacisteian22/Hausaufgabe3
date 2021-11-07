@@ -4,42 +4,42 @@ import java.util.List;
 
 import java.model.Kurs;
 import java.model.Student;
-import java.model.Teacher;
+import java.model.Professor;
 
 /**
  * @author sncam
  */
 public class MainController {
-    private CourseController courseController;
+    private KursController kursController;
     private StudentController studentController;
-    private TeacherController teacherController;
+    private ProfessorController teacherController;
 
 
-    public MainController(CourseController courseController, StudentController studentController, TeacherController teacherController) {
-        this.courseController = courseController;
+    public MainController(KursController kursController, StudentController studentController, ProfessorController professorController) {
+        this.kursController = kursController;
         this.studentController = studentController;
-        this.teacherController = teacherController;
+        this.professorController = professorController;
     }
 
     /**
      *
      * @param studentId id of the student
-     * @param courseId  id of the course
+     * @param kursId  id of the course
      * @return the methode courseAddedToStudent or studentAddedToCourse
      */
-    public boolean registerStudentToCourse(Long studentId, Long courseId){
+    public boolean registerStudentToKurs(Long studentId, Long kursId){
         Student student = this.studentController.findStudentById(studentId);
-        Kurs kurs = this.courseController.findCourseById(courseId);
+        Kurs kurs = this.kursController.findKursById(kursId);
 
         if(kurs.getStudentsEnrolled().size() == kurs.getMaxEnrolled())
             throw new RuntimeException("Course is full");
         if(student.getTotalCredit()+ kurs.getCredits() > 30)
             throw new RuntimeException("To many Credits");
 
-        Boolean courseAddedToStudent = this.studentController.addCourseToStudent(studentId, kurs);
-        Boolean studentAddedToCourse = this.courseController.addStudentToCourse(courseId,student);
+        Boolean kursAddedToStudent = this.studentController.addKursToStudent(studentId, kurs);
+        Boolean studentAddedToKurs = this.kursController.addStudentToKurs(kursId,student);
 
-        return courseAddedToStudent | studentAddedToCourse;
+        return kursAddedToStudent | studentAddedToKurs;
     }
 
     /**
@@ -47,16 +47,16 @@ public class MainController {
      * @return all the course
      */
     public Iterable<Kurs> getAllCourses(){
-        return this.courseController.getAllCourses();
+        return this.kursController.getAllKurse();
     }
 
     /**
      *
-     * @param courseId id of the course
+     * @param kursId id of the course
      * @return all the student of the course with the matching id
      */
-    public Iterable<Student> getAllStudentsByCourseId(Long courseId){
-        return this.courseController.findCourseById(courseId).getStudentsEnrolled();
+    public Iterable<Student> getAllStudentsByKursId(Long kursId){
+        return this.kursController.findKursById(kursId).getStudentsEnrolled();
     }
 
     /**
@@ -64,53 +64,53 @@ public class MainController {
      * @return all the available courses
      */
     public Iterable<Kurs> getAllAvailableCourses(){
-        return this.courseController.getAvailableCourses();
+        return this.kursController.getAvailableKurse();
     }
 
     /**
      *
-     * @param courseName the name of the course
+     * @param kursName the name of the course
      * @param teacherId the id of the teacher in this course
      * @param maxEnrolled number of max student for this course
-     * @param courseId id of this course
+     * @param kursId id of this course
      * @param credits the credits of the course
      * @return the updated course
      */
-    public boolean updateCourse(String courseName, long teacherId, int maxEnrolled, long courseId, int credits){
-        Kurs existingKurs = this.courseController.findCourseById(courseId);
-        Kurs kurs = new Kurs(courseName, this.teacherController.findById(teacherId), maxEnrolled, courseId, null ,credits);
+    public boolean updateKurs(String kursName, long teacherId, int maxEnrolled, long kursId, int credits){
+        Kurs existingKurs = this.kursController.findKursById(kursId);
+        Kurs kurs = new Kurs(kursName, this.teacherController.findById(teacherId), maxEnrolled, kursId, null ,credits);
         if(existingKurs.getCredits() != credits)
         {
             for(Student student: existingKurs.getStudentsEnrolled()){
-                Student newStudent = new Student(student.getName(),student.getFirstName(),student.getStudentId(),student.getTotalCredit(),student.getEnrolledCourses());
-                newStudent.getEnrolledCourses().removeIf(kurs1 -> kurs1.getCourseId()==courseId);
-                newStudent.getEnrolledCourses().add(kurs);
+                Student newStudent = new Student(student.getName(),student.getFirstName(),student.getStudentId(),student.getTotalCredit(),student.getEnrolledKurse());
+                newStudent.getEnrolledKurse().removeIf(kurs1 -> kurs1.getKursId()==kursId);
+                newStudent.getEnrolledKurse().add(kurs);
                 this.studentController.updateStudent(newStudent);
             }
         }
-        return this.courseController.updateCourse(kurs) == null;
+        return this.kursController.updateKurs(kurs) == null;
     }
 
     /**
      *
-     * @param courseId id of the course
-     * @param teacherId id of the teacher
+     * @param kursId id of the course
+     * @param professorId id of the teacher
      * @return true or false if the new teacher was updated or not
      */
-    public boolean deleteCourseFromTeacher(long courseId, long teacherId){
-        Teacher existingTeacher = this.teacherController.findById(teacherId);
-        List<Kurs> newKursList = existingTeacher.getCourses();
-        newKursList.removeIf(kurs1 -> kurs1.getCourseId()==courseId);
+    public boolean deleteCourseFromTeacher(long kursId, long professorId){
+        Professor existingProfessor = this.professorController.findById(professorId);
+        List<Kurs> newKursList = existingProfessor.getKurse();
+        newKursList.removeIf(kurs1 -> kurs1.getKursId()==kursId);
 
-        Teacher newTeacher= new Teacher(existingTeacher.getName(), existingTeacher.getFirstName(), existingTeacher.getTeacherId(), newKursList);
-        Kurs kurs = this.courseController.findCourseById(courseId);
+        Professor newProfessor= new Professor(existingProfessor.getName(), existingProfessor.getFirstName(), existingProfessor.getProfessorId(), newKursList);
+        Kurs kurs = this.kursController.findKursById(kursId);
         for(Student student: kurs.getStudentsEnrolled()){
-            Student newStudent = new Student(student.getName(),student.getFirstName(),student.getStudentId(),student.getTotalCredit(),student.getEnrolledCourses());
-            newStudent.getEnrolledCourses().removeIf(kurs1 -> kurs1.getCourseId()==courseId);
+            Student newStudent = new Student(student.getName(),student.getFirstName(),student.getStudentId(),student.getTotalCredit(),student.getEnrolledKurse());
+            newStudent.getEnrolledKurse().removeIf(kurs1 -> kurs1.getKursId()==kursId);
             this.studentController.updateStudent(newStudent);
         }
-        this.courseController.emptyCourseStudentList(courseId);
-        return this.teacherController.updateTeacher(newTeacher) == null;
+        this.kursController.emptyKursStudentenList(kursId);
+        return this.professorController.updateProfessor(newProfessor) == null;
     }
 
 }

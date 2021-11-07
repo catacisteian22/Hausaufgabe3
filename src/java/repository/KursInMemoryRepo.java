@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * @author sncam
  */
-public class KursInMemoryRepo implements CrudRepository<Course>{
-    private List<Course> courses;
+public class KursInMemoryRepo implements CrudRepository<Kurs>{
+    private List<Kurs> kurse;
 
-    public CourseInMemoryRepo(List<Course> courses) {
-        this.courses = courses;
+    public KursInMemoryRepo(List<Kurs> kurse) {
+        this.kurse = kurse;
     }
 
     /**
@@ -23,9 +23,9 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
      * @throws RuntimeException if the id is null or student list is empty
      */
     @Override
-    public Course findOne(Long id) {
+    public Kurs findOne(Long id) {
 
-        if (courses.isEmpty())
+        if (kurse.isEmpty())
         {
             throw new RuntimeException("Course list is empty");
         }
@@ -35,8 +35,8 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
         }
         else
         {
-            for (Course c : courses) {
-                if (id == c.getCourseId()) {
+            for (Kurs c : kurse) {
+                if (id == c.getKursId()) {
                     return c;
                 }
             }
@@ -48,8 +48,8 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
      * @return all entities
      */
     @Override
-    public Iterable<Course> findAll() {
-        return courses;
+    public Iterable<Kurs> findAll() {
+        return kurse;
     }
 
     /**
@@ -57,15 +57,15 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
      * @return null if the given entity is saved, otherwise returns the entity (id already exists)
      */
     @Override
-    public Course save(Course entity) {
-        for(Course c:courses)
+    public Kurs save(Kurs entity) {
+        for(Kurs c:kurse)
         {
             if(c.equals(entity))
             {
                 return c;
             }
         }
-        courses.add(entity);
+        kurse.add(entity);
         return null;
 
     }
@@ -76,19 +76,19 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
      * @throws RuntimeException if course list is empty
      */
     @Override
-    public Course delete(Course entity) {
+    public Kurs delete(Kurs entity) {
 
-        if(courses.isEmpty())
+        if(kurse.isEmpty())
         {
             throw new RuntimeException("Course list is empty");
         }
         else
         {
-            for (Course c : courses)
+            for (Kurs c : kurse)
             {
                 if (c.equals(entity))
                 {
-                    courses.remove(entity);
+                    kurse.remove(entity);
                     return entity;
                 }
             }
@@ -101,10 +101,10 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
      * @return null if the entity is updated, otherwise returns the entity
      */
     @Override
-    public Course update(Course entity) {
+    public Kurs update(Kurs entity) {
 
-        for(Course course: courses) {
-            if (course.getCourseId() == entity.getCourseId()) {
+        for(Kurs course: kurse) {
+            if (course.getKursId() == entity.getKursId()) {
                 course.setName(entity.getName());
                 course.setTeacher(entity.getTeacher());
                 course.setMaxEnrolled(entity.getMaxEnrolled());
@@ -122,12 +122,12 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
      * @return the course with the student added or null if the id of the course was not found
      */
 
-    public Course addStudentToCourse (long courseId, Student student){
-        for (Course course: courses){
-            if(courseId == course.getCourseId())
+    public Kurs addStudentToCourse (long kursId, Student student){
+        for (Kurs kurs: kurse){
+            if(kursId == kurs.getKursId())
             {
-                course.getStudentsEnrolled().add(student);
-                return course;
+                kurs.getStudentsEnrolled().add(student);
+                return kurs;
             }
         }
         return null;
@@ -138,11 +138,11 @@ public class KursInMemoryRepo implements CrudRepository<Course>{
      * @param courseId id of the course
      */
 
-    public void emptyCourseStudentList(Long courseId){
-        for (Course course: courses){
-            if(courseId == course.getCourseId())
+    public void emptyKursStudentList(Long kursId){
+        for (Kurs kurs: kurse){
+            if(kursId == kurs.getKursId())
             {
-                course.setStudentsEnrolled(new ArrayList<>());
+                kurs.setStudentsEnrolled(new ArrayList<>());
             }
         }
     }

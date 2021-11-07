@@ -1,21 +1,21 @@
-import com.company.domain.Teacher;
-import com.company.repository.TeacherInMemoryRepo;
+import java.model.Professor;
+import java.repository.ProfessorInMemoryRepo;
 
 /**
  * @author sncam
  */
 public class ProfessorController {
-    private TeacherInMemoryRepo repository;
+    private ProfessorInMemoryRepo repository;
 
-    public TeacherController(TeacherInMemoryRepo teacherRepo) {
-        this.repository = teacherRepo;
+    public ProfessorController(ProfessorInMemoryRepo professorRepo) {
+        this.repository = professorRepo;
     }
 
-    public Teacher findById(long teacherId){
-        return this.repository.findOne(teacherId);
+    public Professor findById(long professorId){
+        return this.repository.findOne(professorId);
     }
 
-    public Teacher updateTeacher(Teacher teacher) {
-        return this.repository.update(teacher);
+    public Professor updateProfessor(Professor professor) {
+        return this.repository.update(professor);
     }
 }

@@ -3,80 +3,75 @@ package java.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.company.domain.Course;
-        import com.company.domain.Student;
-        import com.company.repository.CourseInMemoryRepo;
-        import java.util.ArrayList;
-        import java.util.List;
+import java.model.Kurs;
+import java.model.Student;
+import java.repository.KursInMemoryRepo;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author sncam
  */
 public class KursController {
-    private CourseInMemoryRepo repository;
+    private KursInMemoryRepo repository;
 
-    public CourseController(CourseInMemoryRepo courseInMemoryRepo){
-        this.repository = courseInMemoryRepo;
+    public KursController(KursInMemoryRepo kursInMemoryRepo) {
+        this.repository = KursInMemoryRepo;
     }
 
     /**
-     *
-     * @param courseId id of the course
+     * @param kursId id of the course
      * @return the course with the same id
      */
-    public Course findCourseById(Long courseId) {
-        return this.repository.findOne(courseId);
+    public Kurs findKursById(Long kursId) {
+        return this.repository.findOne(kursId);
     }
 
     /**
-     *
-     * @param courseId id of the course
+     * @param kursId  id of the course
      * @param student object student
      * @return true or false if the student was added to the course or not
      */
-    public Boolean addStudentToCourse(Long courseId, Student student) {
-        Course updatedCourse = this.repository.addStudentToCourse(courseId,student);
-        return updatedCourse!=null;
+    public Boolean addStudentToKurs(Long kursId, Student student) {
+        Course updatedCourse = this.repository.addStudentToCourse(kursId, student);
+        return updatedCourse != null;
     }
 
     /**
-     *
      * @return all the course
      */
-    public Iterable<Course> getAllCourses() {
+    public Iterable<Kurs> getAllKurse() {
         return this.repository.findAll();
     }
 
     /**
-     *
      * @return all the course with available places
      */
-    public Iterable<Course> getAvailableCourses() {
-        Iterable<Course> courseList = this.repository.findAll();
-        List<Course> availableCourse = new ArrayList<>();
-        for (Course c:courseList) {
-            if(c.getStudentsEnrolled().size() < c.getMaxEnrolled())
-            {
-                availableCourse.add(c);
+    public Iterable<Kurs> getAvailableKurs() {
+        Iterable<Kurs> kursList = this.repository.findAll();
+        List<Kurs> availableKurs = new ArrayList<>();
+        for (Kurs c : kursList) {
+            if (c.getStudentsEnrolled().size() < c.getMaxEnrolled()) {
+                availableKurs.add(c);
             }
         }
-        return availableCourse;
+        return availableKurs;
     }
 
     /**
-     *
-     * @param course object course
+     * @param kurs object course
      * @return the updated course
      */
-    public Course updateCourse(Course course) {
-        return this.repository.update(course);
+    public Kurs updateKurs(Kurs kurs) {
+        return this.repository.update(kurs);
     }
 
     /**
-     *  run the methode emptylist of the repo
+     * run the methode emptylist of the repo
+     *
      * @param courseId the id of the course
      */
-    public void emptyCourseStudentList(Long courseId){
-        this.repository.emptyCourseStudentList(courseId);
+    public void emptyKursStudentenList(Long kursId) {
+        this.repository.emptyKursStudentenList(kursId);
     }
 }
