@@ -1,7 +1,4 @@
-package test.repository;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+package test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,74 +15,76 @@ import main.repository.ProfessorInMemoryRepo;
 import main.repository.StudentInMemoryRepo;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-class KursInMemoryRepositoryTest {
 
-    @org.junit.jupiter.api.Test
+class StudentInMemoryRepositoryTest {
+
+    @Test
     void findOne() {
+        Student s1 = new Student("S1", "SF1", 1, 0, null);
+        Student s2 = new Student("S2", "SF2", 2, 0, null);
+        Student s3 = new Student("S3", "SF3", 3, 0, null);
+        StudentInMemoryRepo studentInMemoryRepo = new StudentInMemoryRepo(Arrays.asList(s1, s2, s3));
 
-        Kurs c1 = new Kurs("C1", null, 100, 1, null, 6);
-        Kurs c2 = new Kurs("C2", null, 2, 2, null, 25);
-        Kurs c3 = new Kurs("C3", null, 50, 3, null, 4);
-        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(Arrays.asList(c1, c2, c3));
-
-        Kurs kurs = kursInMemoryRepo.findOne(Long.parseLong("1"));
-        assertNotNull(kurs);
+        Student student = studentInMemoryRepo.findOne(Long.parseLong("1"));
+        assertNotNull(student);
     }
 
     @Test
     void findAll() {
+        Student s1 = new Student("S1", "SF1", 1, 0, null);
+        Student s2 = new Student("S2", "SF2", 2, 0, null);
+        Student s3 = new Student("S3", "SF3", 3, 0, null);
+        StudentInMemoryRepo studentInMemoryRepo = new StudentInMemoryRepo(Arrays.asList(s1, s2, s3));
 
-        Kurs c1 = new Kurs("C1", null, 100, 1, null, 6);
-        Kurs c2 = new Kurs("C2", null, 2, 2, null, 25);
-        Kurs c3 = new Kurs("C3", null, 50, 3, null, 4);
-        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(Arrays.asList(c1, c2, c3));
-
-        List<Kurs> kursList = (List<Kurs>) kursInMemoryRepo.findAll();
-        assertEquals(3, kursList.size());
+        List<Student> studentList = (List<Student>) studentInMemoryRepo.findAll();
+        assertEquals(3, studentList.size());
     }
 
     @Test
     void save() {
-        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(new ArrayList<>());
+        StudentInMemoryRepo studentInMemoryRepo = new StudentInMemoryRepo(new ArrayList<>());
 
-        Kurs c4 = new Kurs("C4", null, 60, 4, null, 12);
-        kursInMemoryRepo.save(c4);
+        Student s4 = new Student("S4", "SF4", 4, 0, null);
+        studentInMemoryRepo.save(s4);
 
-        List<Kurs> kursList = (List<Kurs>) kursInMemoryRepo.findAll();
-        assertEquals(1, kursList.size());
+        List<Student> studentList = (List<Student>) studentInMemoryRepo.findAll();
+        assertEquals(1, studentList.size());
     }
 
     @Test
     void delete() {
-        Kurs c1 = new Kurs("C1", null, 100, 1, null, 6);
-        Kurs c2 = new Kurs("C2", null, 2, 2, null, 25);
-        Kurs c3 = new Kurs("C3", null, 50, 3, null, 4);
-        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(new ArrayList<>());
-        kursInMemoryRepo.save(c1);
-        kursInMemoryRepo.save(c2);
-        kursInMemoryRepo.save(c3);
+        Student s1 = new Student("S1", "SF1", 1, 0, null);
+        Student s2 = new Student("S2", "SF2", 2, 0, null);
+        Student s3 = new Student("S3", "SF3", 3, 0, null);
+        StudentInMemoryRepo studentInMemoryRepo = new StudentInMemoryRepo(new ArrayList<>());
 
-        List<Kurs> kursList = (List<Kurs>) kursInMemoryRepo.findAll();
-        assertEquals(3, kursList.size());
+        studentInMemoryRepo.save(s1);
+        studentInMemoryRepo.save(s2);
+        studentInMemoryRepo.save(s3);
 
-        kursInMemoryRepo.delete(c2);
-        assertEquals(2, kursList.size());
+        List<Student> studentList = (List<Student>) studentInMemoryRepo.findAll();
+        assertEquals(3, studentList.size());
+
+        studentInMemoryRepo.delete(s2);
+        assertEquals(2, studentList.size());
     }
 
     @Test
     void update() {
-        Kurs c1 = new Kurs("C1", null, 100, 1, null, 6);
-        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(Arrays.asList(c1));
-        Kurs c2 = new Kurs("C2", null, 2, 1, null, 25);
+        Student s1 = new Student("S1", "SF1", 1, 0, null);
+        StudentInMemoryRepo studentInMemoryRepo = new StudentInMemoryRepo(List.of(s1));
+        Student s2 = new Student("S2", "SF2", 1, 0, null);
 
-        kursInMemoryRepo.update(c2);
-        assertEquals("C2", kursInMemoryRepo.findOne(Long.parseLong("1")).getName());
+        studentInMemoryRepo.update(s2);
+        assertEquals("SF2", studentInMemoryRepo.findOne(Long.parseLong("1")).getLastName());
     }
 
     @Test
-    void addStudentToCourse() {
+    void addCourseToStudent() {
 
         List<Student> listStudentsKurse1 = new ArrayList<>();
         List<Student> listStudentsKurse2 = new ArrayList<>();
@@ -99,6 +98,7 @@ class KursInMemoryRepositoryTest {
         List<Kurs> listKurseStudent2 = new ArrayList<>();
         List<Kurs> listKurseStudent3 = new ArrayList<>();
 
+
         Student s1 = new Student("S1", "SF1", 1, 0, null);
         Student s2 = new Student("S2", "SF2", 2, 0, null);
         Student s3 = new Student("S3", "SF3", 3, 0, null);
@@ -111,10 +111,13 @@ class KursInMemoryRepositoryTest {
         Kurs c2 = new Kurs("C2", t2, 2, 2, null, 25);
         Kurs c3 = new Kurs("C3", t3, 50, 3, null, 4);
 
+
         listKurseStudent1.add(c1);
         listKurseStudent1.add(c3);
+
         listKurseStudent2.add(c2);
         listKurseStudent2.add(c3);
+
         listKurseStudent3.add(c1);
 
         s1.setEnrolledKurse(listKurseStudent1);
@@ -149,22 +152,23 @@ class KursInMemoryRepositoryTest {
         c2.setStudentsEnrolled(listStudentsKurse2);
         c3.setStudentsEnrolled(listStudentsKurse3);
 
+
         List<Kurs> kursList = new ArrayList<>(Arrays.asList(c1, c2, c3));
         List<Student> studentList = new ArrayList<>(Arrays.asList(s1, s2, s3));
-        List<Professor> professorList = new ArrayList<>(Arrays.asList(t1, t2, t3));
+        List<Professor> teacherList = new ArrayList<>(Arrays.asList(t1, t2, t3));
 
-        KursInMemoryRepo kursRepo = new KursInMemoryRepo(kursList);
-        ProfessorInMemoryRepo professorRepo = new ProfessorInMemoryRepo(professorList);
+        KursInMemoryRepo courseRepo = new KursInMemoryRepo(kursList);
+        ProfessorInMemoryRepo professorRepo = new ProfessorInMemoryRepo(teacherList);
         StudentInMemoryRepo studentRepo = new StudentInMemoryRepo(studentList);
 
-        KursController kursController = new KursController(kursRepo);
+        KursController kursController = new KursController(courseRepo);
         ProfessorController professorController = new ProfessorController(professorRepo);
         StudentController studentController = new StudentController(studentRepo);
 
         MainController mainController = new MainController(kursController, studentController, professorController);
         mainController.registerStudentToKurs(Long.parseLong("3"), (Long.parseLong("1")));
 
-        List<Student> newStudentList = (List<Student>) mainController.getAllStudentsByKursId(Long.parseLong("1"));
-        assertEquals(3, newStudentList.size());
+        List<Student> newKurseList = (List<Student>) mainController.getAllStudentsByKursId(Long.parseLong("1"));
+        assertEquals(3, newKurseList.size());
     }
 }

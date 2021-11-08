@@ -1,4 +1,4 @@
-package test.repository;
+package test;
 
 import main.model.Professor;
 import main.repository.ProfessorInMemoryRepo;
@@ -66,10 +66,10 @@ class ProfessorInMemoryRepositoryTest {
     @Test
     void update() {
         Professor t1 = new Professor("T1", "TF1", 1, null);
-        ProfessorInMemoryRepo professorInMemoryRepo = new ProfessorInMemoryRepo(Arrays.asList(t1));
+        ProfessorInMemoryRepo professorInMemoryRepo = new ProfessorInMemoryRepo(List.of(t1));
         Professor t2 = new Professor("T2", "TF2", 1, null);
 
         professorInMemoryRepo.update(t2);
-        assertEquals("T2", professorInMemoryRepo.findOne(Long.parseLong("1")).getLastName());
+        assertEquals("T2", professorInMemoryRepo.findOne(Long.parseLong("1")).getFirstName());
     }
 }

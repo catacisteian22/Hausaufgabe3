@@ -89,12 +89,12 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     @Override
     public Kurs update(Kurs entity) {
 
-        for (Kurs course : kurse) {
-            if (course.getKursId() == entity.getKursId()) {
-                course.setName(entity.getName());
-                course.setProfessor(entity.getProfessor());
-                course.setMaxEnrolled(entity.getMaxEnrolled());
-                course.setCredits(entity.getCredits());
+        for (Kurs kurs : kurse) {
+            if (kurs.getKursId() == entity.getKursId()) {
+                kurs.setName(entity.getName());
+                kurs.setProfessor(entity.getProfessor());
+                kurs.setMaxEnrolled(entity.getMaxEnrolled());
+                kurs.setCredits(entity.getCredits());
                 return null;
             }
         }

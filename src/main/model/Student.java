@@ -8,8 +8,8 @@ public class Student extends Person {
     public int totalCredit;
     public List<Kurs> enrolledKurse;
 
-    public Student(String lastName, String firstName, long studentId, int totalCredit, List<Kurs> enrolledKurse) {
-        super(lastName, firstName);
+    public Student(String firstName, String lastName, long studentId, int totalCredit, List<Kurs> enrolledKurse) {
+        super(firstName, lastName);
         this.studentId = studentId;
         this.totalCredit = totalCredit;
         this.enrolledKurse = enrolledKurse;

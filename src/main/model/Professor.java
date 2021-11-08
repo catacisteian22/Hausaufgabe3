@@ -7,8 +7,8 @@ public class Professor extends Person {
     public long professorId;
     public List<Kurs> kurse;
 
-    public Professor(String lastName, String firstName, long professorId, List<Kurs> kurse) {
-        super(lastName, firstName);
+    public Professor(String firstName, String lastName, long professorId, List<Kurs> kurse) {
+        super(firstName, lastName);
         this.professorId = professorId;
         this.kurse = kurse;
     }

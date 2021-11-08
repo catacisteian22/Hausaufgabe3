@@ -11,20 +11,6 @@ public class Person {
     }
 
     /**
-     * @return lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * @param lastName der Person
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
      * @return firstName
      */
     public String getFirstName() {
@@ -36,6 +22,20 @@ public class Person {
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    /**
+     * @return lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName der Person
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
 }
