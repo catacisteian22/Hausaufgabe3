@@ -1,8 +1,8 @@
-package java.view;
+package main.view;
 
-import java.controller.MainController;
-import java.model.Kurs;
-import java.model.Student;
+import main.controller.MainController;
+import main.model.Kurs;
+import main.model.Student;
 
 import java.util.Scanner;
 
@@ -14,7 +14,7 @@ public class AnmeldungSystem {
         this.mainController = mainController;
     }
 
-    public void startApplication(){
+    public void startApplication() {
         this.showMenu();
         this.startConsole();
     }
@@ -23,7 +23,7 @@ public class AnmeldungSystem {
      * print the menu
      */
 
-    private void showMenu(){
+    private void showMenu() {
         StringBuilder builder = new StringBuilder();
         builder.append("Welcome to the University's Application\n")
                 .append("Press: 1 for add student to course\n")
@@ -39,9 +39,9 @@ public class AnmeldungSystem {
     /**
      * run the methode of each case
      */
-    private void startConsole(){
+    private void startConsole() {
         Scanner scanner = new Scanner(System.in);
-        while (true){
+        while (true) {
             String opt = scanner.nextLine();
 
             switch (opt) {
@@ -49,12 +49,12 @@ public class AnmeldungSystem {
 
                 case "1":
                     System.out.println("Please insert course id");
-                    String courseId = scanner.nextLine();
+                    String kursId = scanner.nextLine();
                     System.out.println("Please insert student id");
                     String studentId = scanner.nextLine();
 
                     try {
-                        boolean response = this.mainController.registerStudentToCourse(Long.parseLong(courseId), Long.parseLong(studentId));
+                        boolean response = this.mainController.registerStudentToKurs(Long.parseLong(kursId), Long.parseLong(studentId));
                         if (response) System.out.println("Student added successfully");
                         else System.out.println("Failed to add student to course");
                     } catch (Exception e) {
@@ -65,19 +65,19 @@ public class AnmeldungSystem {
                     break;
 
                 case "2":
-                    Iterable<Course> courseList = this.mainController.getAllCourses();
-                    for (Course course : courseList) {
-                        System.out.println(course.getName() + " , available places = " + String.valueOf((course.getStudentsEnrolled().size() - course.getMaxEnrolled())*(-1)) + "\n");
+                    Iterable<Kurs> kursList = this.mainController.getAllKurse();
+                    for (Kurs kurs : kursList) {
+                        System.out.println(kurs.getName() + " , available places = " + String.valueOf((kurs.getStudentsEnrolled().size() - kurs.getMaxEnrolled()) * (-1)) + "\n");
                     }
                     break;
 
                 case "3":
                     System.out.println("Please insert course id");
-                    courseId = scanner.nextLine();
+                    kursId = scanner.nextLine();
 
                     try {
-                        Iterable<Student> studentListInACourse = this.mainController.getAllStudentsByCourseId(Long.parseLong(courseId));
-                        for (Student student : studentListInACourse) {
+                        Iterable<Student> studentListInAKurs = this.mainController.getAllStudentsByKursId(Long.parseLong(kursId));
+                        for (Student student : studentListInAKurs) {
                             System.out.println("Id of the student in this course: " + student.getStudentId() + "\n");
                         }
                     } catch (Exception e) {
@@ -87,18 +87,18 @@ public class AnmeldungSystem {
                     break;
 
                 case "4":
-                    Iterable<Course> availableCourseList = this.mainController.getAllAvailableCourses();
-                    System.out.println("all the available courses: " + availableCourseList + "\n");
+                    Iterable<Kurs> availableKurseList = this.mainController.getAllAvailableKurse();
+                    System.out.println("all the available courses: " + availableKurseList + "\n");
                     break;
 
                 case "5":
                     System.out.println("Please insert course id");
-                    courseId = scanner.nextLine();
+                    kursId = scanner.nextLine();
                     System.out.println("Please insert teacher id");
-                    String teacherId = scanner.nextLine();
+                    String professorId = scanner.nextLine();
 
                     try {
-                        boolean response = this.mainController.deleteCourseFromTeacher(Long.parseLong(courseId), Long.parseLong(teacherId));
+                        boolean response = this.mainController.deleteKursFromProfessor(Long.parseLong(kursId), Long.parseLong(professorId));
                         if (response) System.out.println("Course deleted successfully");
                         else System.out.println("Failed to delete course");
                     } catch (Exception e) {

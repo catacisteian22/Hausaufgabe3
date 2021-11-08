@@ -1,4 +1,4 @@
-package java.model;
+package main.model;
 
 /**
  * @author sncam

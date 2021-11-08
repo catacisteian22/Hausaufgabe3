@@ -1,14 +1,14 @@
-package java.repository;
+package main.repository;
 
-import java.model.Kurs;
-import java.model.Student;
+import main.model.Kurs;
+import main.model.Student;
 
 import java.util.List;
 
 /**
  * @author sncam
  */
-public class StudentInMemoryRepo implements CrudRepository<Student>{
+public class StudentInMemoryRepo implements CrudRepository<Student> {
     private List<Student> student;
 
     public StudentInMemoryRepo(List<Student> student) {
@@ -21,17 +21,13 @@ public class StudentInMemoryRepo implements CrudRepository<Student>{
      * @throws RuntimeException if the id is null or student list is empty
      */
     @Override
-    public Student findOne(Long id){
-        if (student.isEmpty())
-        {
+    public Student findOne(Long id) {
+        if (student.isEmpty()) {
             throw new RuntimeException("Student list is empty");
         }
-        if(id==null)
-        {
+        if (id == null) {
             throw new RuntimeException("Id can't be null");
-        }
-        else
-        {
+        } else {
             for (Student s : student) {
                 if (id == s.getStudentId()) {
                     return s;
@@ -56,10 +52,8 @@ public class StudentInMemoryRepo implements CrudRepository<Student>{
      */
     @Override
     public Student save(Student entity) {
-        for(Student s:student)
-        {
-            if(s.equals(entity))
-            {
+        for (Student s : student) {
+            if (s.equals(entity)) {
                 return s;
             }
         }
@@ -74,12 +68,9 @@ public class StudentInMemoryRepo implements CrudRepository<Student>{
      */
     @Override
     public Student delete(Student entity) {
-        if(student.isEmpty())
-        {
+        if (student.isEmpty()) {
             throw new RuntimeException("Student list is empty");
-        }
-        else
-        {
+        } else {
             for (Student s : student) {
 
                 if (s.equals(entity)) {
@@ -98,12 +89,12 @@ public class StudentInMemoryRepo implements CrudRepository<Student>{
     @Override
     public Student update(Student entity) {
 
-        for(Student student: student) {
+        for (Student student : student) {
             if (student.getStudentId() == entity.getStudentId()) {
                 student.setName(entity.getName());
                 student.setFirstName(entity.getFirstName());
                 student.setTotalCredit(entity.getTotalCredit());
-                student.setEnrolledCourses(entity.getEnrolledCourses());
+                student.setEnrolledKurse(entity.getEnrolledKurse());
                 return null;
             }
         }
@@ -111,18 +102,16 @@ public class StudentInMemoryRepo implements CrudRepository<Student>{
     }
 
     /**
-     *
      * @param studentId id of the student
-     * @param kurs object course
+     * @param kurs      object course
      * @return the student with the course added or null if the id of the student was not found
      */
 
-    public Student addKursToStudent (long studentId, Kurs kurs){
-        for (Student student: student){
-            if(studentId == student.getStudentId())
-            {
-                student.getEnrolledCourses().add(kurs);
-                student.setTotalCredit(student.getTotalCredit()+ kurs.getCredits());
+    public Student addKursToStudent(long studentId, Kurs kurs) {
+        for (Student student : student) {
+            if (studentId == student.getStudentId()) {
+                student.getEnrolledKurse().add(kurs);
+                student.setTotalCredit(student.getTotalCredit() + kurs.getCredits());
                 return student;
             }
         }

@@ -1,17 +1,20 @@
-import java.model.Professor;
-import java.repository.ProfessorInMemoryRepo;
+package main.controller;
+
+import main.model.Professor;
+import main.repository.ProfessorInMemoryRepo;
 
 /**
  * @author sncam
  */
 public class ProfessorController {
+
     private ProfessorInMemoryRepo repository;
 
     public ProfessorController(ProfessorInMemoryRepo professorRepo) {
         this.repository = professorRepo;
     }
 
-    public Professor findById(long professorId){
+    public Professor findById(long professorId) {
         return this.repository.findOne(professorId);
     }
 

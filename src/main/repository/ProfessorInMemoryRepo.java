@@ -1,19 +1,18 @@
-package java.repository;
+package main.repository;
 
 
-import com.company.domain.Teacher;
+import main.model.Professor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author sncam
  */
-public class ProfessorInMemoryRepo implements CrudRepository<Teacher>{
-    private List<Teacher> teacher;
+public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
+    private List<Professor> professor;
 
-    public TeacherInMemoryRepo(List<Teacher> teacher) {
-        this.teacher = teacher;
+    public ProfessorInMemoryRepo(List<Professor> professor) {
+        this.professor = professor;
     }
 
     /**
@@ -22,20 +21,16 @@ public class ProfessorInMemoryRepo implements CrudRepository<Teacher>{
      * @throws RuntimeException if the id is null or teacher list is empty
      */
     @Override
-    public Teacher findOne(Long id) {
+    public Professor findOne(Long id) {
 
-        if (teacher.isEmpty())
-        {
+        if (professor.isEmpty()) {
             throw new RuntimeException("Teacher list is empty");
         }
-        if(id==null)
-        {
+        if (id == null) {
             throw new RuntimeException("Id can't be null");
-        }
-        else
-        {
-            for (Teacher t : teacher) {
-                if (id == t.getTeacherId()) {
+        } else {
+            for (Professor t : professor) {
+                if (id == t.getProfessorId()) {
                     return t;
                 }
             }
@@ -47,9 +42,9 @@ public class ProfessorInMemoryRepo implements CrudRepository<Teacher>{
      * @return all entities
      */
     @Override
-    public Iterable<Teacher> findAll() {
+    public Iterable<Professor> findAll() {
 
-        return teacher;
+        return professor;
     }
 
     /**
@@ -57,15 +52,13 @@ public class ProfessorInMemoryRepo implements CrudRepository<Teacher>{
      * @return null if the given entity is saved, otherwise returns the entity (id already exists)
      */
     @Override
-    public Teacher save(Teacher entity) {
-        for(Teacher t:teacher)
-        {
-            if(t.equals(entity))
-            {
+    public Professor save(Professor entity) {
+        for (Professor t : professor) {
+            if (t.equals(entity)) {
                 return t;
             }
         }
-        teacher.add(entity);
+        professor.add(entity);
         return null;
 
     }
@@ -76,18 +69,15 @@ public class ProfessorInMemoryRepo implements CrudRepository<Teacher>{
      * @throws RuntimeException if teacher list is empty
      */
     @Override
-    public Teacher delete(Teacher entity) {
+    public Professor delete(Professor entity) {
 
-        if(teacher.isEmpty())
-        {
+        if (professor.isEmpty()) {
             throw new RuntimeException("Teacher list is empty");
-        }
-        else
-        {
-            for (Teacher t : teacher) {
+        } else {
+            for (Professor t : professor) {
 
                 if (t.equals(entity)) {
-                    teacher.remove(entity);
+                    professor.remove(entity);
                     return entity;
                 }
             }
@@ -100,13 +90,13 @@ public class ProfessorInMemoryRepo implements CrudRepository<Teacher>{
      * @return null if the entity is updated, otherwise returns the entity
      */
     @Override
-    public Teacher update(Teacher entity) {
+    public Professor update(Professor entity) {
 
-        for(Teacher teacher: teacher) {
-            if (teacher.getTeacherId() == entity.getTeacherId()) {
-                teacher.setName(entity.getName());
-                teacher.setFirstName(entity.getFirstName());
-                teacher.setCourses(entity.getCourses());
+        for (Professor professor : professor) {
+            if (professor.getProfessorId() == entity.getProfessorId()) {
+                professor.setName(entity.getName());
+                professor.setFirstName(entity.getFirstName());
+                professor.setKurse(entity.getKurse());
                 return null;
             }
         }

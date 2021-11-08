@@ -1,11 +1,9 @@
-package java.controller;
+package main.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import main.model.Kurs;
+import main.model.Student;
+import main.repository.KursInMemoryRepo;
 
-import java.model.Kurs;
-import java.model.Student;
-import java.repository.KursInMemoryRepo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +14,7 @@ public class KursController {
     private KursInMemoryRepo repository;
 
     public KursController(KursInMemoryRepo kursInMemoryRepo) {
-        this.repository = KursInMemoryRepo;
+        this.repository = kursInMemoryRepo;
     }
 
     /**
@@ -33,8 +31,8 @@ public class KursController {
      * @return true or false if the student was added to the course or not
      */
     public Boolean addStudentToKurs(Long kursId, Student student) {
-        Course updatedCourse = this.repository.addStudentToCourse(kursId, student);
-        return updatedCourse != null;
+        Kurs updatedKurs = this.repository.addStudentToKurs(kursId, student);
+        return updatedKurs != null;
     }
 
     /**
@@ -47,7 +45,7 @@ public class KursController {
     /**
      * @return all the course with available places
      */
-    public Iterable<Kurs> getAvailableKurs() {
+    public Iterable<Kurs> getAvailableKurse() {
         Iterable<Kurs> kursList = this.repository.findAll();
         List<Kurs> availableKurs = new ArrayList<>();
         for (Kurs c : kursList) {
@@ -69,9 +67,9 @@ public class KursController {
     /**
      * run the methode emptylist of the repo
      *
-     * @param courseId the id of the course
+     * @param kursId the id of the course
      */
-    public void emptyKursStudentenList(Long kursId) {
-        this.repository.emptyKursStudentenList(kursId);
+    public void emptyKursStudentList(Long kursId) {
+        this.repository.emptyKursStudentList(kursId);
     }
 }

@@ -1,8 +1,8 @@
-package java.controller;
+package main.controller;
 
-import java.model.Kurs;
-import java.model.Student;
-import java.repository.StudentInMemoryRepo;
+import main.model.Kurs;
+import main.model.Student;
+import main.repository.StudentInMemoryRepo;
 
 /**
  * @author sncam
@@ -10,32 +10,29 @@ import java.repository.StudentInMemoryRepo;
 public class StudentController {
     private StudentInMemoryRepo repository;
 
-    public StudentController(StudentInMemoryRepo studentRepo){
+    public StudentController(StudentInMemoryRepo studentRepo) {
         this.repository = studentRepo;
     }
 
     /**
-     *
      * @param studentId id of the student
      * @return the student with the same id
      */
-    public Student findStudentById(Long studentId){
+    public Student findStudentById(Long studentId) {
         return this.repository.findOne(studentId);
     }
 
     /**
-     *
      * @param studentId id of the student
-     * @param kurs object course
+     * @param kurs      object course
      * @return true or false if the course was added to the student or not
      */
     public Boolean addKursToStudent(Long studentId, Kurs kurs) {
         Student updatedStudent = this.repository.addKursToStudent(studentId, kurs);
-        return updatedStudent!=null;
+        return updatedStudent != null;
     }
 
     /**
-     *
      * @param student object student
      * @return the updated student
      */

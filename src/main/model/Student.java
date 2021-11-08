@@ -1,4 +1,5 @@
-package java.model;
+package main.model;
+
 import java.util.List;
 
 /**
@@ -8,13 +9,13 @@ public class Student extends Person {
 
     public long studentId;
     public int totalCredit;
-    public List<Kurs> enrolledCours;
+    public List<Kurs> enrolledKurse;
 
-    public Student(String name, String firstName, long studentId, int totalCredit, List<Kurs> enrolledCours) {
+    public Student(String name, String firstName, long studentId, int totalCredit, List<Kurs> enrolledKurse) {
         super(name, firstName);
         this.studentId = studentId;
         this.totalCredit = totalCredit;
-        this.enrolledCours = enrolledCours;
+        this.enrolledKurse = enrolledKurse;
     }
 
     /*
@@ -43,7 +44,6 @@ public class Student extends Person {
     }
 
     /**
-     *
      * @param totalCredit credits of the student
      */
     public void setTotalCredit(int totalCredit) {
@@ -53,19 +53,18 @@ public class Student extends Person {
     /**
      * @return enrolledCourses
      */
-    public List<Kurs> getEnrolledCourses() {
-        return enrolledCours;
+    public List<Kurs> getEnrolledKurse() {
+        return enrolledKurse;
     }
 
     /**
-     * @param enrolledCours courses where the student goes
+     * @param enrolledKurse courses where the student goes
      */
-    public void setEnrolledCourses(List<Kurs> enrolledCours) {
-        this.enrolledCours = enrolledCours;
+    public void setEnrolledKurse(List<Kurs> enrolledKurse) {
+        this.enrolledKurse = enrolledKurse;
     }
 
     /**
-     *
      * @return tostring
      */
     @Override

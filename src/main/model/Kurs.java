@@ -1,7 +1,6 @@
-package java.model;
+package main.model;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author sncam
@@ -11,15 +10,15 @@ public class Kurs {
     public String name;
     public Person teacher;
     public int maxEnrolled;
-    public long courseId;
+    public long kursId;
     public List<Student> studentsEnrolled;
     public int credits;
 
-    public Kurs(String name, Person teacher, int maxEnrolled, long courseId, List<Student> studentsEnrolled, int credits) {
+    public Kurs(String name, Person teacher, int maxEnrolled, long kursId, List<Student> studentsEnrolled, int credits) {
         this.name = name;
         this.teacher = teacher;
         this.maxEnrolled = maxEnrolled;
-        this.courseId = courseId;
+        this.kursId = kursId;
         this.studentsEnrolled = studentsEnrolled;
         this.credits = credits;
     }
@@ -71,17 +70,17 @@ getter and setter
     }
 
     /**
-     * @return course id
+     * @return kursid
      */
-    public long getCourseId() {
-        return courseId;
+    public long getKursId() {
+        return kursId;
     }
 
     /**
-     * @param courseId, id of the teacher
+     * @param kursId, id of the teacher
      */
-    public void setCourseId(long courseId) {
-        this.courseId = courseId;
+    public void setKursId(long kursId) {
+        this.kursId = kursId;
     }
 
     /**
@@ -114,7 +113,6 @@ getter and setter
 
 
     /**
-     *
      * @return tostring
      */
     @Override
