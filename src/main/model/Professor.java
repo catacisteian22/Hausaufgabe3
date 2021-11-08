@@ -10,29 +10,17 @@ public class Professor extends Person {
     public long professorId;
     public List<Kurs> kurse;
 
-    public Professor(String name, String firstName, long professorId, List<Kurs> kurse) {
-        super(name, firstName);
+    public Professor(String lastName, String firstName, long professorId, List<Kurs> kurse) {
+        super(lastName, firstName);
         this.professorId = professorId;
         this.kurse = kurse;
     }
-
-
-    /*
-    getter and setter
-    */
 
     /**
      * @return teacher id
      */
     public long getProfessorId() {
         return professorId;
-    }
-
-    /**
-     * @param professorId, id of the teacher
-     */
-    public void setProfessorId(long professorId) {
-        this.professorId = professorId;
     }
 
     /**
@@ -43,7 +31,7 @@ public class Professor extends Person {
     }
 
     /**
-     * @param kurse courses teched by the teacher
+     * @param kurse courses taught by the teacher
      */
     public void setKurse(List<Kurs> kurse) {
         this.kurse = kurse;
@@ -55,7 +43,7 @@ public class Professor extends Person {
     @Override
     public String toString() {
         return "Teacher{" +
-                "name='" + name + '\'' +
+                "lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 '}';
     }

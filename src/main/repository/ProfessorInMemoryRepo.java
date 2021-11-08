@@ -9,7 +9,8 @@ import java.util.List;
  * @author sncam
  */
 public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
-    private List<Professor> professor;
+
+    private final List<Professor> professor;
 
     public ProfessorInMemoryRepo(List<Professor> professor) {
         this.professor = professor;
@@ -94,7 +95,7 @@ public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
 
         for (Professor professor : professor) {
             if (professor.getProfessorId() == entity.getProfessorId()) {
-                professor.setName(entity.getName());
+                professor.setLastName(entity.getLastName());
                 professor.setFirstName(entity.getFirstName());
                 professor.setKurse(entity.getKurse());
                 return null;

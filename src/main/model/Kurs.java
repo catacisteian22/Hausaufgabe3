@@ -23,10 +23,6 @@ public class Kurs {
         this.credits = credits;
     }
 
-    /*
-getter and setter
-*/
-
     /**
      * @return name
      */
@@ -77,13 +73,6 @@ getter and setter
     }
 
     /**
-     * @param kursId, id of the teacher
-     */
-    public void setKursId(long kursId) {
-        this.kursId = kursId;
-    }
-
-    /**
      * @return students that are enrolled
      */
     public List<Student> getStudentsEnrolled() {
@@ -91,7 +80,7 @@ getter and setter
     }
 
     /**
-     * @param studentsEnrolled, list of students thate are enrolled
+     * @param studentsEnrolled, list of students that are enrolled
      */
     public void setStudentsEnrolled(List<Student> studentsEnrolled) {
         this.studentsEnrolled = studentsEnrolled;

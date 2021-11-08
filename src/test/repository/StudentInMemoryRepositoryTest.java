@@ -1,6 +1,7 @@
 package test.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import main.controller.KursController;
 import main.controller.MainController;
@@ -29,7 +30,7 @@ class StudentInMemoryRepositoryTest {
         StudentInMemoryRepo studentInMemoryRepo = new StudentInMemoryRepo(Arrays.asList(s1, s2, s3));
 
         Student student = studentInMemoryRepo.findOne(Long.parseLong("1"));
-        assert student != null;
+        assertNotNull(student);
     }
 
     @Test
@@ -81,7 +82,7 @@ class StudentInMemoryRepositoryTest {
         Student s2 = new Student("S2", "SF2", 1, 0, null);
 
         studentInMemoryRepo.update(s2);
-        assertEquals("S2", studentInMemoryRepo.findOne(Long.parseLong("1")).getName());
+        assertEquals("S2", studentInMemoryRepo.findOne(Long.parseLong("1")).getLastName());
 
     }
 

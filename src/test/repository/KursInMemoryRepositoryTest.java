@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import main.controller.KursController;
 import main.controller.MainController;
@@ -27,11 +28,10 @@ class KursInMemoryRepositoryTest {
         Kurs c1 = new Kurs("C1", null, 100, 1, null, 6);
         Kurs c2 = new Kurs("C2", null, 2, 2, null, 25);
         Kurs c3 = new Kurs("C3", null, 50, 3, null, 4);
-        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(Arrays.asList(c1,c2,c3));
+        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(Arrays.asList(c1, c2, c3));
 
         Kurs kurs = kursInMemoryRepo.findOne(Long.parseLong("1"));
-        assert kurs != null;
-
+        assertNotNull(kurs);
     }
 
     @Test
@@ -40,7 +40,7 @@ class KursInMemoryRepositoryTest {
         Kurs c1 = new Kurs("C1", null, 100, 1, null, 6);
         Kurs c2 = new Kurs("C2", null, 2, 2, null, 25);
         Kurs c3 = new Kurs("C3", null, 50, 3, null, 4);
-        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(Arrays.asList(c1,c2,c3));
+        KursInMemoryRepo kursInMemoryRepo = new KursInMemoryRepo(Arrays.asList(c1, c2, c3));
 
         List<Kurs> kursList = (List<Kurs>) kursInMemoryRepo.findAll();
         assertEquals(3, kursList.size());
@@ -81,7 +81,7 @@ class KursInMemoryRepositoryTest {
         Kurs c2 = new Kurs("C2", null, 2, 1, null, 25);
 
         kursInMemoryRepo.update(c2);
-        assertEquals("C2", kursInMemoryRepo.findOne(Long.parseLong("1")).getName() );
+        assertEquals("C2", kursInMemoryRepo.findOne(Long.parseLong("1")).getName());
     }
 
     @Test
@@ -99,7 +99,6 @@ class KursInMemoryRepositoryTest {
         List<Kurs> listKurseStudent2 = new ArrayList<>();
         List<Kurs> listKurseStudent3 = new ArrayList<>();
 
-
         Student s1 = new Student("S1", "SF1", 1, 0, null);
         Student s2 = new Student("S2", "SF2", 2, 0, null);
         Student s3 = new Student("S3", "SF3", 3, 0, null);
@@ -112,7 +111,6 @@ class KursInMemoryRepositoryTest {
         Kurs c2 = new Kurs("C2", t2, 2, 2, null, 25);
         Kurs c3 = new Kurs("C3", t3, 50, 3, null, 4);
 
-
         listKurseStudent1.add(c1);
         listKurseStudent1.add(c3);
         listKurseStudent2.add(c2);
@@ -120,16 +118,16 @@ class KursInMemoryRepositoryTest {
         listKurseStudent3.add(c1);
 
         s1.setEnrolledKurse(listKurseStudent1);
-        for(Kurs kurs: listKurseStudent1)
-            s1.setTotalCredit(s1.getTotalCredit()+ kurs.getCredits());
+        for (Kurs kurs : listKurseStudent1)
+            s1.setTotalCredit(s1.getTotalCredit() + kurs.getCredits());
 
         s2.setEnrolledKurse(listKurseStudent2);
-        for(Kurs kurs: listKurseStudent2)
-            s2.setTotalCredit(s2.getTotalCredit()+ kurs.getCredits());
+        for (Kurs kurs : listKurseStudent2)
+            s2.setTotalCredit(s2.getTotalCredit() + kurs.getCredits());
 
         s3.setEnrolledKurse(listKurseStudent3);
-        for(Kurs kurs: listKurseStudent3)
-            s3.setTotalCredit(s3.getTotalCredit()+ kurs.getCredits());
+        for (Kurs kurs : listKurseStudent3)
+            s3.setTotalCredit(s3.getTotalCredit() + kurs.getCredits());
 
         listKurseProfessor1.add(c1);
         listKurseProfessor2.add(c2);
@@ -151,10 +149,9 @@ class KursInMemoryRepositoryTest {
         c2.setStudentsEnrolled(listStudentsKurse2);
         c3.setStudentsEnrolled(listStudentsKurse3);
 
-
-        List<Kurs> kursList = new ArrayList<>(Arrays.asList(c1,c2,c3));
-        List<Student> studentList = new ArrayList<>(Arrays.asList(s1,s2,s3));
-        List<Professor> professorList = new ArrayList<>(Arrays.asList(t1,t2,t3));
+        List<Kurs> kursList = new ArrayList<>(Arrays.asList(c1, c2, c3));
+        List<Student> studentList = new ArrayList<>(Arrays.asList(s1, s2, s3));
+        List<Professor> professorList = new ArrayList<>(Arrays.asList(t1, t2, t3));
 
         KursInMemoryRepo kursRepo = new KursInMemoryRepo(kursList);
         ProfessorInMemoryRepo professorRepo = new ProfessorInMemoryRepo(professorList);
@@ -168,6 +165,6 @@ class KursInMemoryRepositoryTest {
         mainController.registerStudentToKurs(Long.parseLong("3"), (Long.parseLong("1")));
 
         List<Student> newStudentList = (List<Student>) mainController.getAllStudentsByKursId(Long.parseLong("1"));
-        assertEquals(3,newStudentList.size());
+        assertEquals(3, newStudentList.size());
     }
 }

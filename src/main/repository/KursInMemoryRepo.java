@@ -10,7 +10,8 @@ import java.util.List;
  * @author sncam
  */
 public class KursInMemoryRepo implements CrudRepository<Kurs> {
-    private List<Kurs> kurse;
+
+    private final List<Kurs> kurse;
 
     public KursInMemoryRepo(List<Kurs> kurse) {
         this.kurse = kurse;

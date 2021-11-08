@@ -10,9 +10,9 @@ import java.util.List;
  * @author sncam
  */
 public class MainController {
-    private KursController kursController;
-    private StudentController studentController;
-    private ProfessorController professorController;
+    private final KursController kursController;
+    private final StudentController studentController;
+    private final ProfessorController professorController;
 
 
     public MainController(KursController kursController, StudentController studentController, ProfessorController professorController) {
@@ -76,7 +76,7 @@ public class MainController {
         Kurs kurs = new Kurs(kursName, this.professorController.findById(professorId), maxEnrolled, kursId, null, credits);
         if (existingKurs.getCredits() != credits) {
             for (Student student : existingKurs.getStudentsEnrolled()) {
-                Student newStudent = new Student(student.getName(), student.getFirstName(), student.getStudentId(), student.getTotalCredit(), student.getEnrolledKurse());
+                Student newStudent = new Student(student.getLastName(), student.getFirstName(), student.getStudentId(), student.getTotalCredit(), student.getEnrolledKurse());
                 newStudent.getEnrolledKurse().removeIf(kurs1 -> kurs1.getKursId() == kursId);
                 newStudent.getEnrolledKurse().add(kurs);
                 this.studentController.updateStudent(newStudent);
@@ -95,10 +95,10 @@ public class MainController {
         List<Kurs> newKursList = existingProfessor.getKurse();
         newKursList.removeIf(kurs1 -> kurs1.getKursId() == kursId);
 
-        Professor newProfessor = new Professor(existingProfessor.getName(), existingProfessor.getFirstName(), existingProfessor.getProfessorId(), newKursList);
+        Professor newProfessor = new Professor(existingProfessor.getLastName(), existingProfessor.getFirstName(), existingProfessor.getProfessorId(), newKursList);
         Kurs kurs = this.kursController.findKursById(kursId);
         for (Student student : kurs.getStudentsEnrolled()) {
-            Student newStudent = new Student(student.getName(), student.getFirstName(), student.getStudentId(), student.getTotalCredit(), student.getEnrolledKurse());
+            Student newStudent = new Student(student.getLastName(), student.getFirstName(), student.getStudentId(), student.getTotalCredit(), student.getEnrolledKurse());
             newStudent.getEnrolledKurse().removeIf(kurs1 -> kurs1.getKursId() == kursId);
             this.studentController.updateStudent(newStudent);
         }

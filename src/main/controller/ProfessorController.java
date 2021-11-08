@@ -8,7 +8,7 @@ import main.repository.ProfessorInMemoryRepo;
  */
 public class ProfessorController {
 
-    private ProfessorInMemoryRepo repository;
+    private final ProfessorInMemoryRepo repository;
 
     public ProfessorController(ProfessorInMemoryRepo professorRepo) {
         this.repository = professorRepo;

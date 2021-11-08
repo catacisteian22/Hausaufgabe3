@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class AnmeldungSystem {
 
-    private MainController mainController;
+    private final MainController mainController;
 
     public AnmeldungSystem(MainController mainController) {
         this.mainController = mainController;
@@ -24,16 +24,15 @@ public class AnmeldungSystem {
      */
 
     private void showMenu() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Welcome to the University's Application\n")
-                .append("Press: 1 for add student to course\n")
-                .append("Press: 2 for get all courses\n")
-                .append("Press: 3 for get all student of a course\n")
-                .append("Press: 4 for get all course with free places\n")
-                .append("Press: 5 for a teacher to delete a course in his list\n")
-                .append("Press: 0 to exit application\n")
-                .append("Your choise: ");
-        System.out.println(builder.toString());
+        String builder = "Welcome to the University's Application\n" +
+                "Press: 1 for add student to course\n" +
+                "Press: 2 for get all courses\n" +
+                "Press: 3 for get all student of a course\n" +
+                "Press: 4 for get all course with free places\n" +
+                "Press: 5 for a teacher to delete a course in his list\n" +
+                "Press: 0 to exit application\n" +
+                "Your choice: ";
+        System.out.println(builder);
     }
 
     /**
@@ -67,7 +66,7 @@ public class AnmeldungSystem {
                 case "2":
                     Iterable<Kurs> kursList = this.mainController.getAllKurse();
                     for (Kurs kurs : kursList) {
-                        System.out.println(kurs.getName() + " , available places = " + String.valueOf((kurs.getStudentsEnrolled().size() - kurs.getMaxEnrolled()) * (-1)) + "\n");
+                        System.out.println(kurs.getName() + " , available places = " + (kurs.getStudentsEnrolled().size() - kurs.getMaxEnrolled()) * (-1) + "\n");
                     }
                     break;
 

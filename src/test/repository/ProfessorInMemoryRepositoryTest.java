@@ -17,7 +17,7 @@ class ProfessorInMemoryRepositoryTest {
         Professor t1 = new Professor("T1", "TF1", 1, null);
         Professor t2 = new Professor("T2", "TF2", 2, null);
         Professor t3 = new Professor("T3", "TF3", 3, null);
-        ProfessorInMemoryRepo professorInMemoryRepo = new ProfessorInMemoryRepo(Arrays.asList(t1,t2,t3));
+        ProfessorInMemoryRepo professorInMemoryRepo = new ProfessorInMemoryRepo(Arrays.asList(t1, t2, t3));
 
         Professor professor = professorInMemoryRepo.findOne(Long.parseLong("1"));
         assertNotNull(professor);
@@ -29,7 +29,7 @@ class ProfessorInMemoryRepositoryTest {
         Professor t1 = new Professor("T1", "TF1", 1, null);
         Professor t2 = new Professor("T2", "TF2", 2, null);
         Professor t3 = new Professor("T3", "TF3", 3, null);
-        ProfessorInMemoryRepo professorInMemoryRepo = new ProfessorInMemoryRepo(Arrays.asList(t1,t2,t3));
+        ProfessorInMemoryRepo professorInMemoryRepo = new ProfessorInMemoryRepo(Arrays.asList(t1, t2, t3));
 
         List<Professor> professorList = (List<Professor>) professorInMemoryRepo.findAll();
         assertEquals(3, professorList.size());
@@ -70,6 +70,6 @@ class ProfessorInMemoryRepositoryTest {
         Professor t2 = new Professor("T2", "TF2", 1, null);
 
         professorInMemoryRepo.update(t2);
-        assertEquals("T2", professorInMemoryRepo.findOne(Long.parseLong("1")).getName() );
+        assertEquals("T2", professorInMemoryRepo.findOne(Long.parseLong("1")).getLastName());
     }
 }

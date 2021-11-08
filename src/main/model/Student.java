@@ -11,29 +11,18 @@ public class Student extends Person {
     public int totalCredit;
     public List<Kurs> enrolledKurse;
 
-    public Student(String name, String firstName, long studentId, int totalCredit, List<Kurs> enrolledKurse) {
-        super(name, firstName);
+    public Student(String lastName, String firstName, long studentId, int totalCredit, List<Kurs> enrolledKurse) {
+        super(lastName, firstName);
         this.studentId = studentId;
         this.totalCredit = totalCredit;
         this.enrolledKurse = enrolledKurse;
     }
-
-    /*
-    getter and setter
-    */
 
     /**
      * @return studentId
      */
     public long getStudentId() {
         return studentId;
-    }
-
-    /**
-     * @param studentId the id of the student
-     */
-    public void setStudentId(long studentId) {
-        this.studentId = studentId;
     }
 
     /**
@@ -70,7 +59,7 @@ public class Student extends Person {
     @Override
     public String toString() {
         return "Student{" +
-                "name='" + name + '\'' +
+                "name='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", studentId=" + studentId +
                 ", totalCredit=" + totalCredit +

@@ -11,7 +11,7 @@ import java.util.List;
  * @author sncam
  */
 public class KursController {
-    private KursInMemoryRepo repository;
+    private final KursInMemoryRepo repository;
 
     public KursController(KursInMemoryRepo kursInMemoryRepo) {
         this.repository = kursInMemoryRepo;
@@ -65,7 +65,7 @@ public class KursController {
     }
 
     /**
-     * run the methode emptylist of the repo
+     * run the methode emptyList of the repo
      *
      * @param kursId the id of the course
      */

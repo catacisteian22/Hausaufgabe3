@@ -5,30 +5,26 @@ package main.model;
  */
 public class Person {
 
-    public String name;
     public String firstName;
+    public String lastName;
 
-    public Person(String name, String firstName) {
-        this.name = name;
+    public Person(String firstName, String lastName) {
         this.firstName = firstName;
-    }
-
-    /*
-getter and setter
-*/
-
-    /**
-     * @return name
-     */
-    public String getName() {
-        return name;
+        this.lastName = lastName;
     }
 
     /**
-     * @param name of the person
+     * @return lastName
      */
-    public void setName(String name) {
-        this.name = name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * @param lastName of the person
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**

@@ -8,7 +8,7 @@ public interface CrudRepository<E> {
      * @param id -the id of the entity to be returned id must not be null
      * @return the entity with the specified id or null - if there is no entity with the given id
      */
-    E findOne(Long id) throws Exception;
+    E findOne(Long id);
 
     /**
      * @return all entities
@@ -27,11 +27,11 @@ public interface CrudRepository<E> {
      * @param entity entity must be not null
      * @return the removed entity or null if there is no entity with the given id
      */
-    E delete(E entity) throws Exception;
+    E delete(E entity);
 
     /**
      * @param entity entity must not be null
-     * @return null - if the entity is updated, otherwise returns the entity - (e.g id does not exist).
+     * @return null - if the entity is updated, otherwise returns the entity - (e.g. id does not exist).
      */
     E update(E entity);
 }

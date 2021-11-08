@@ -8,7 +8,7 @@ import main.repository.StudentInMemoryRepo;
  * @author sncam
  */
 public class StudentController {
-    private StudentInMemoryRepo repository;
+    private final StudentInMemoryRepo repository;
 
     public StudentController(StudentInMemoryRepo studentRepo) {
         this.repository = studentRepo;
@@ -34,9 +34,8 @@ public class StudentController {
 
     /**
      * @param student object student
-     * @return the updated student
      */
-    public Student updateStudent(Student student) {
-        return this.repository.update(student);
+    public void updateStudent(Student student) {
+        this.repository.update(student);
     }
 }
