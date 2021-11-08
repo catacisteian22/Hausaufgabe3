@@ -1,7 +1,7 @@
 package main.repository;
 
 /**
- * @author sncam
+ * Beispiel die wir vom Professor bekommen haben
  */
 public interface CrudRepository<E> {
     /**

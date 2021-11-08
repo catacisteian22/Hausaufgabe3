@@ -6,9 +6,6 @@ import main.model.Student;
 
 import java.util.List;
 
-/**
- * @author sncam
- */
 public class MainController {
     private final KursController kursController;
     private final StudentController studentController;
@@ -22,9 +19,9 @@ public class MainController {
     }
 
     /**
-     * @param studentId id of the student
-     * @param kursId    id of the course
-     * @return the methode courseAddedToStudent or studentAddedToCourse
+     * @param studentId ID des Studenten
+     * @param kursId ID des Kurses
+     * @return die Methode kursAddedToStudent oder studentAddedToKurs
      */
     public boolean registerStudentToKurs(Long studentId, Long kursId) {
         Student student = this.studentController.findStudentById(studentId);
@@ -42,34 +39,34 @@ public class MainController {
     }
 
     /**
-     * @return all the course
+     * @return alle Kurse
      */
     public Iterable<Kurs> getAllKurse() {
         return this.kursController.getAllKurse();
     }
 
     /**
-     * @param kursId id of the course
-     * @return all the student of the course with the matching id
+     * @param kursId ID des Kurses
+     * @return alle Studenten des Kurses mit übereinstimmender ID
      */
     public Iterable<Student> getAllStudentsByKursId(Long kursId) {
         return this.kursController.findKursById(kursId).getStudentsEnrolled();
     }
 
     /**
-     * @return all the available courses
+     * @return alle Kurse mit freie Plätze
      */
     public Iterable<Kurs> getAllAvailableKurse() {
         return this.kursController.getAvailableKurse();
     }
 
     /**
-     * @param kursName    the name of the course
-     * @param professorId the id of the teacher in this course
-     * @param maxEnrolled number of max student for this course
-     * @param kursId      id of this course
-     * @param credits     the credits of the course
-     * @return the updated course
+     * @param kursName    Name des Kurses
+     * @param professorId ID des Professors für diesen Kurs
+     * @param maxEnrolled maximale Anzahl von Studenten für diesen Kurs
+     * @param kursId      ID des Kurses
+     * @param credits     die ECTS des Kurses
+     * @return der aktualisierte Kurs
      */
     public boolean updateKurs(String kursName, long professorId, int maxEnrolled, long kursId, int credits) {
         Kurs existingKurs = this.kursController.findKursById(kursId);
@@ -86,9 +83,9 @@ public class MainController {
     }
 
     /**
-     * @param kursId      id of the course
-     * @param professorId id of the teacher
-     * @return true or false if the new teacher was updated or not
+     * @param kursId      ID des Kurses
+     * @param professorId ID des Professors
+     * @return True or False, ob der neue Professor war aktualisiert oder nicht
      */
     public boolean deleteKursFromProfessor(long kursId, long professorId) {
         Professor existingProfessor = this.professorController.findById(professorId);

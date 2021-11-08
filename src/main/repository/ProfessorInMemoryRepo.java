@@ -5,9 +5,6 @@ import main.model.Professor;
 
 import java.util.List;
 
-/**
- * @author sncam
- */
 public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
 
     private final List<Professor> professor;
@@ -17,22 +14,22 @@ public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
     }
 
     /**
-     * @param id -the id of the entity to be returned id must not be null
-     * @return the entity with the specified id or null if there is no entity with the given id
-     * @throws RuntimeException if the id is null or teacher list is empty
+     * @param id -die ID der Entity, die zurückgegeben sein muss(muss nicht NULL sein)
+     * @return die Entity mit der spezifizierten ID oder NULL (ob keine Entity mit dieser ID existiert)
+     * @throws RuntimeException, ob die ID NULL ist oder die Liste der Professoren leer is
      */
     @Override
     public Professor findOne(Long id) {
 
         if (professor.isEmpty()) {
-            throw new RuntimeException("Teacher list is empty");
+            throw new RuntimeException("Error! Liste der Professoren ist leer!");
         }
         if (id == null) {
-            throw new RuntimeException("Id can't be null");
+            throw new RuntimeException("Error! ID darf nicht NULL sein!");
         } else {
-            for (Professor t : professor) {
-                if (id == t.getProfessorId()) {
-                    return t;
+            for (Professor p : professor) {
+                if (id == p.getProfessorId()) {
+                    return p;
                 }
             }
         }
@@ -40,7 +37,7 @@ public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
     }
 
     /**
-     * @return all entities
+     * @return alle Entities
      */
     @Override
     public Iterable<Professor> findAll() {
@@ -49,14 +46,14 @@ public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
     }
 
     /**
-     * @param entity entity must be not null
-     * @return null if the given entity is saved, otherwise returns the entity (id already exists)
+     * @param entity Entity muss nicht NULL sein
+     * @return NULL, ob die gegebene Entity gespeichert war, andernfalls gibt die Entity zurück(ID existiert schon)
      */
     @Override
     public Professor save(Professor entity) {
-        for (Professor t : professor) {
-            if (t.equals(entity)) {
-                return t;
+        for (Professor p : professor) {
+            if (p.equals(entity)) {
+                return p;
             }
         }
         professor.add(entity);
@@ -65,19 +62,19 @@ public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
     }
 
     /**
-     * @param entity entity must be not null
-     * @return the removed entity or null if there is no entity with the given id
-     * @throws RuntimeException if teacher list is empty
+     * @param entity Entity muss nicht NULL sein
+     * @return die entfernte Entity oder NULL, ob keine Entity mit der gegebene ID existiert
+     * @throws RuntimeException, ob die Liste der Professoren leer ist
      */
     @Override
     public Professor delete(Professor entity) {
 
         if (professor.isEmpty()) {
-            throw new RuntimeException("Teacher list is empty");
+            throw new RuntimeException("Error! Liste der Professoren ist leer!");
         } else {
-            for (Professor t : professor) {
+            for (Professor p : professor) {
 
-                if (t.equals(entity)) {
+                if (p.equals(entity)) {
                     professor.remove(entity);
                     return entity;
                 }
@@ -87,8 +84,8 @@ public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
     }
 
     /**
-     * @param entity entity must not be null
-     * @return null if the entity is updated, otherwise returns the entity
+     * @param entity Entity muss nicht NULL sein
+     * @return NULL, ob die Entity aktualisiert ist, andernfalls gibt die Entity zurück
      */
     @Override
     public Professor update(Professor entity) {
@@ -104,4 +101,3 @@ public class ProfessorInMemoryRepo implements CrudRepository<Professor> {
         return entity;
     }
 }
-

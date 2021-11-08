@@ -7,10 +7,8 @@ import main.repository.KursInMemoryRepo;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author sncam
- */
 public class KursController {
+
     private final KursInMemoryRepo repository;
 
     public KursController(KursInMemoryRepo kursInMemoryRepo) {
@@ -18,17 +16,17 @@ public class KursController {
     }
 
     /**
-     * @param kursId id of the course
-     * @return the course with the same id
+     * @param kursId ID des Kurses
+     * @return der Kurs mit derselbe Id
      */
     public Kurs findKursById(Long kursId) {
         return this.repository.findOne(kursId);
     }
 
     /**
-     * @param kursId  id of the course
-     * @param student object student
-     * @return true or false if the student was added to the course or not
+     * @param kursId ID des Kurses
+     * @param student Objekt Student
+     * @return True oder False, ob der Student zu einem Kurs hinzugefügt war oder nicht
      */
     public Boolean addStudentToKurs(Long kursId, Student student) {
         Kurs updatedKurs = this.repository.addStudentToKurs(kursId, student);
@@ -36,14 +34,14 @@ public class KursController {
     }
 
     /**
-     * @return all the course
+     * @return alle Kurse
      */
     public Iterable<Kurs> getAllKurse() {
         return this.repository.findAll();
     }
 
     /**
-     * @return all the course with available places
+     * @return alle Kurse mit freie Plätze
      */
     public Iterable<Kurs> getAvailableKurse() {
         Iterable<Kurs> kursList = this.repository.findAll();
@@ -57,17 +55,17 @@ public class KursController {
     }
 
     /**
-     * @param kurs object course
-     * @return the updated course
+     * @param kurs Objekt Kurs
+     * @return die aktualisierte Kurse
      */
     public Kurs updateKurs(Kurs kurs) {
         return this.repository.update(kurs);
     }
 
     /**
-     * run the methode emptyList of the repo
+     * lauf die Methode emptyList aus dem Repository an
      *
-     * @param kursId the id of the course
+     * @param kursId ID des Kurses
      */
     public void emptyKursStudentList(Long kursId) {
         this.repository.emptyKursStudentList(kursId);

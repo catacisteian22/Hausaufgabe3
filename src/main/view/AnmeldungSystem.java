@@ -20,18 +20,17 @@ public class AnmeldungSystem {
     }
 
     /**
-     * print the menu
+     * drücken des Menüs
      */
-
     private void showMenu() {
-        String builder = "Welcome to the University's Application\n" +
-                "Press: 1 for add student to course\n" +
-                "Press: 2 for get all courses\n" +
-                "Press: 3 for get all student of a course\n" +
-                "Press: 4 for get all course with free places\n" +
-                "Press: 5 for a teacher to delete a course in his list\n" +
-                "Press: 0 to exit application\n" +
-                "Your choice: ";
+        String builder = "Willkommen zu der App der Universität\n" +
+                "Drücke: 1 um einen Studenten zu einem Kurs einzuschreiben\n" +
+                "Drücke: 2 zeigt an alle Kurse an\n" +
+                "Drücke: 3 zeigt alle Studenten für einen bestimmten Kurs an\n" +
+                "Drücke: 4 zeigt alle Kurse mit freie Plätze\n" +
+                "Drücke: 5 ein Professor will einen Kurs von seiner Liste zu löschen\n" +
+                "Drücke: 0 um die App zu verlassen\n" +
+                "Deine Auswahl: ";
         System.out.println(builder);
     }
 
@@ -45,39 +44,37 @@ public class AnmeldungSystem {
 
             switch (opt) {
 
-
                 case "1":
-                    System.out.println("Please insert course id");
+                    System.out.println("Bitte fügt die ID des Kurses ein: ");
                     String kursId = scanner.nextLine();
-                    System.out.println("Please insert student id");
+                    System.out.println("Bitte fügt die ID des Studenten ein: ");
                     String studentId = scanner.nextLine();
 
                     try {
                         boolean response = this.mainController.registerStudentToKurs(Long.parseLong(kursId), Long.parseLong(studentId));
-                        if (response) System.out.println("Student added successfully");
-                        else System.out.println("Failed to add student to course");
+                        if (response) System.out.println("Student hinzugefügt mit Erfolg!");
+                        else System.out.println("Student war nicht hinzugefügt :(");
                     } catch (Exception e) {
                         System.out.println("Exception occurred:");
                         System.out.println(e.getMessage());
                     }
-
                     break;
 
                 case "2":
                     Iterable<Kurs> kursList = this.mainController.getAllKurse();
                     for (Kurs kurs : kursList) {
-                        System.out.println(kurs.getName() + " , available places = " + (kurs.getStudentsEnrolled().size() - kurs.getMaxEnrolled()) * (-1) + "\n");
+                        System.out.println(kurs.getName() + " , freie Plätze = " + (kurs.getStudentsEnrolled().size() - kurs.getMaxEnrolled()) * (-1) + "\n");
                     }
                     break;
 
                 case "3":
-                    System.out.println("Please insert course id");
+                    System.out.println("Bitte fügt die ID des Kurses ein: ");
                     kursId = scanner.nextLine();
 
                     try {
                         Iterable<Student> studentListInAKurs = this.mainController.getAllStudentsByKursId(Long.parseLong(kursId));
                         for (Student student : studentListInAKurs) {
-                            System.out.println("Id of the student in this course: " + student.getStudentId() + "\n");
+                            System.out.println("ID des Studenten in diesem Kurs: " + student.getStudentId() + "\n");
                         }
                     } catch (Exception e) {
                         System.out.println("Exception occurred:");
@@ -87,19 +84,19 @@ public class AnmeldungSystem {
 
                 case "4":
                     Iterable<Kurs> availableKurseList = this.mainController.getAllAvailableKurse();
-                    System.out.println("all the available courses: " + availableKurseList + "\n");
+                    System.out.println("Alle Kurse mit freie Plätze: " + availableKurseList + "\n");
                     break;
 
                 case "5":
-                    System.out.println("Please insert course id");
+                    System.out.println("Bitte fügt die ID des Kurses ein: ");
                     kursId = scanner.nextLine();
-                    System.out.println("Please insert teacher id");
+                    System.out.println("Bitte fügt die ID des Professors ein: ");
                     String professorId = scanner.nextLine();
 
                     try {
                         boolean response = this.mainController.deleteKursFromProfessor(Long.parseLong(kursId), Long.parseLong(professorId));
-                        if (response) System.out.println("Course deleted successfully");
-                        else System.out.println("Failed to delete course");
+                        if (response) System.out.println("Kurs gelöscht mit Erfolg!");
+                        else System.out.println("Der Kurs war nicht gelöscht :(");
                     } catch (Exception e) {
                         System.out.println("Exception occurred:");
                         System.out.println(e.getMessage());
@@ -107,7 +104,7 @@ public class AnmeldungSystem {
                     break;
 
                 case "0":
-                    System.out.println("Good-Bye!!");
+                    System.out.println("Auf Wiedersehen!!!");
                     return;
             }
             this.showMenu();

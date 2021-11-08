@@ -2,21 +2,18 @@ package main.model;
 
 import java.util.List;
 
-/**
- * @author sncam
- */
 public class Kurs {
 
     public String name;
-    public Person teacher;
+    public Person professor;
     public int maxEnrolled;
     public long kursId;
     public List<Student> studentsEnrolled;
     public int credits;
 
-    public Kurs(String name, Person teacher, int maxEnrolled, long kursId, List<Student> studentsEnrolled, int credits) {
+    public Kurs(String name, Person professor, int maxEnrolled, long kursId, List<Student> studentsEnrolled, int credits) {
         this.name = name;
-        this.teacher = teacher;
+        this.professor = professor;
         this.maxEnrolled = maxEnrolled;
         this.kursId = kursId;
         this.studentsEnrolled = studentsEnrolled;
@@ -24,42 +21,42 @@ public class Kurs {
     }
 
     /**
-     * @return name
+     * @return Name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @param name of the course
+     * @param name des Kurses
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @return teacher
+     * @return Professor
      */
-    public Person getTeacher() {
-        return teacher;
+    public Person getProfessor() {
+        return professor;
     }
 
     /**
-     * @param teacher, person who teach the course
+     * @param professor Person, die der Kurs lehrt
      */
-    public void setTeacher(Person teacher) {
-        this.teacher = teacher;
+    public void setProfessor(Person professor) {
+        this.professor = professor;
     }
 
     /**
-     * @return number max of student in the course
+     * @return maximale Anzahl von Studenten in der Kurs
      */
     public int getMaxEnrolled() {
         return maxEnrolled;
     }
 
     /**
-     * @param maxEnrolled number max of student in the course
+     * @param maxEnrolled maximale Anzahl von Studenten in der Kurs
      */
     public void setMaxEnrolled(int maxEnrolled) {
         this.maxEnrolled = maxEnrolled;
@@ -73,14 +70,14 @@ public class Kurs {
     }
 
     /**
-     * @return students that are enrolled
+     * @return Studenten, die eingeschrieben sind
      */
     public List<Student> getStudentsEnrolled() {
         return studentsEnrolled;
     }
 
     /**
-     * @param studentsEnrolled, list of students that are enrolled
+     * @param studentsEnrolled, Liste von Studenten, die eingeschrieben sind
      */
     public void setStudentsEnrolled(List<Student> studentsEnrolled) {
         this.studentsEnrolled = studentsEnrolled;
@@ -94,24 +91,23 @@ public class Kurs {
     }
 
     /**
-     * @param credits, vale of the course
+     * @param credits, ECTS des Kurses
      */
     public void setCredits(int credits) {
         this.credits = credits;
     }
 
-
     /**
-     * @return tostring
+     * @return toString
      */
     @Override
     public String toString() {
-        return "Course{" +
-                "name='" + name + '\'' +
-                ", teacher=" + teacher +
+        return "Kurs{" +
+                "Name='" + name + '\'' +
+                ", Professor=" + professor +
                 ", maxEnrolled=" + maxEnrolled +
                 ", studentsEnrolled=" + studentsEnrolled +
-                ", credits=" + credits +
+                ", ECTS=" + credits +
                 '}';
     }
 }

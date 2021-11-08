@@ -16,6 +16,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Die Hausaufgabe3 Program implementiert eine Applikation, welche die Studierende für einen
+ * bestimmten Kurs sich anzumelden hilft. Man kann Informationen zum Kurs und zu den
+ * Teilnehmern hinzufügen, löschen, ändern und abrufen.
+ *
+ * @author  Cisteian Catalina
+ * @version 1.0
+ * @since   2020-11-08
+ */
 public class Main {
 
     public static void main(String[] args) {

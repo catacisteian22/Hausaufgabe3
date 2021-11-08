@@ -3,9 +3,6 @@ package main.controller;
 import main.model.Professor;
 import main.repository.ProfessorInMemoryRepo;
 
-/**
- * @author sncam
- */
 public class ProfessorController {
 
     private final ProfessorInMemoryRepo repository;

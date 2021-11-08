@@ -6,9 +6,6 @@ import main.model.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author sncam
- */
 public class KursInMemoryRepo implements CrudRepository<Kurs> {
 
     private final List<Kurs> kurse;
@@ -18,22 +15,22 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     }
 
     /**
-     * @param id -the id of the entity to be returned id must not be null
-     * @return the entity with the specified id or null if there is no entity with the given id
-     * @throws RuntimeException if the id is null or student list is empty
+     * @param id -die ID der Entity, die zurückgegeben sein muss(muss nicht NULL sein)
+     * @return die Entity mit der spezifizierten ID oder NULL (ob keine Entity mit dieser ID existiert)
+     * @throws RuntimeException, ob die ID NULL ist oder die Liste der Kurse leer ist
      */
     @Override
     public Kurs findOne(Long id) {
 
         if (kurse.isEmpty()) {
-            throw new RuntimeException("Course list is empty");
+            throw new RuntimeException("Error! Liste der Kurse ist leer!");
         }
         if (id == null) {
-            throw new RuntimeException("Id can't be null");
+            throw new RuntimeException("Error! ID darf nicht NULL sein");
         } else {
-            for (Kurs c : kurse) {
-                if (id == c.getKursId()) {
-                    return c;
+            for (Kurs k : kurse) {
+                if (id == k.getKursId()) {
+                    return k;
                 }
             }
         }
@@ -41,7 +38,7 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     }
 
     /**
-     * @return all entities
+     * @return alle Entities
      */
     @Override
     public Iterable<Kurs> findAll() {
@@ -49,14 +46,14 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     }
 
     /**
-     * @param entity entity must be not null
-     * @return null if the given entity is saved, otherwise returns the entity (id already exists)
+     * @param entity Entity muss nicht NULL sein
+     * @return NULL, ob die gegebene Entity gespeichert war, andernfalls gibt die Entity zurück(ID existiert schon)
      */
     @Override
     public Kurs save(Kurs entity) {
-        for (Kurs c : kurse) {
-            if (c.equals(entity)) {
-                return c;
+        for (Kurs k : kurse) {
+            if (k.equals(entity)) {
+                return k;
             }
         }
         kurse.add(entity);
@@ -65,18 +62,18 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     }
 
     /**
-     * @param entity entity must be not null
-     * @return the removed entity or null if there is no entity with the given id
-     * @throws RuntimeException if course list is empty
+     * @param entity Entity muss nicht NULL sein
+     * @return die entfernte Entity oder NULL, ob keine Entity mit der gegebene ID existiert
+     * @throws RuntimeException, ob die Liste der Kurse leer ist
      */
     @Override
     public Kurs delete(Kurs entity) {
 
         if (kurse.isEmpty()) {
-            throw new RuntimeException("Course list is empty");
+            throw new RuntimeException("Error! Liste der Kurse ist leer!");
         } else {
-            for (Kurs c : kurse) {
-                if (c.equals(entity)) {
+            for (Kurs k : kurse) {
+                if (k.equals(entity)) {
                     kurse.remove(entity);
                     return entity;
                 }
@@ -86,8 +83,8 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     }
 
     /**
-     * @param entity entity must not be null
-     * @return null if the entity is updated, otherwise returns the entity
+     * @param entity Entity muss nicht NULL sein
+     * @return NULL, ob die Entity aktualisiert ist, andernfalls gibt die Entity zurück
      */
     @Override
     public Kurs update(Kurs entity) {
@@ -95,7 +92,7 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
         for (Kurs course : kurse) {
             if (course.getKursId() == entity.getKursId()) {
                 course.setName(entity.getName());
-                course.setTeacher(entity.getTeacher());
+                course.setProfessor(entity.getProfessor());
                 course.setMaxEnrolled(entity.getMaxEnrolled());
                 course.setCredits(entity.getCredits());
                 return null;
@@ -105,9 +102,9 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     }
 
     /**
-     * @param kursId  id of the course
-     * @param student object student
-     * @return the course with the student added or null if the id of the course was not found
+     * @param kursId  ID des Kurses
+     * @param student Objekt Student
+     * @return der Kurs mit dem Studenten hinzugefügt oder NULL, ob die ID des Kurses nicht gefunden war
      */
 
     public Kurs addStudentToKurs(long kursId, Student student) {
@@ -121,9 +118,9 @@ public class KursInMemoryRepo implements CrudRepository<Kurs> {
     }
 
     /**
-     * set a new empty arraylist to the course
+     * Stell eine neue leere ArrayList für den Kurs
      *
-     * @param kursId id of the course
+     * @param kursId ID des Kurses
      */
 
     public void emptyKursStudentList(Long kursId) {

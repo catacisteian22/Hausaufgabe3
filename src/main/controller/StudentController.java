@@ -4,10 +4,8 @@ import main.model.Kurs;
 import main.model.Student;
 import main.repository.StudentInMemoryRepo;
 
-/**
- * @author sncam
- */
 public class StudentController {
+
     private final StudentInMemoryRepo repository;
 
     public StudentController(StudentInMemoryRepo studentRepo) {
@@ -15,17 +13,17 @@ public class StudentController {
     }
 
     /**
-     * @param studentId id of the student
-     * @return the student with the same id
+     * @param studentId ID des Studenten
+     * @return der Student mit dieselbe ID
      */
     public Student findStudentById(Long studentId) {
         return this.repository.findOne(studentId);
     }
 
     /**
-     * @param studentId id of the student
-     * @param kurs      object course
-     * @return true or false if the course was added to the student or not
+     * @param studentId ID des Studenten
+     * @param kurs      Objekt Kurs
+     * @return True oder False, ob der Kurs war yu den Studenten hinzugefügt
      */
     public Boolean addKursToStudent(Long studentId, Kurs kurs) {
         Student updatedStudent = this.repository.addKursToStudent(studentId, kurs);
@@ -33,7 +31,7 @@ public class StudentController {
     }
 
     /**
-     * @param student object student
+     * @param student Objekt Student
      */
     public void updateStudent(Student student) {
         this.repository.update(student);

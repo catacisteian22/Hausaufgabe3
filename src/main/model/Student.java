@@ -2,9 +2,6 @@ package main.model;
 
 import java.util.List;
 
-/**
- * @author sncam
- */
 public class Student extends Person {
 
     public long studentId;
@@ -33,7 +30,7 @@ public class Student extends Person {
     }
 
     /**
-     * @param totalCredit credits of the student
+     * @param totalCredit ECTS des Studenten
      */
     public void setTotalCredit(int totalCredit) {
         this.totalCredit = totalCredit;
@@ -47,7 +44,7 @@ public class Student extends Person {
     }
 
     /**
-     * @param enrolledKurse courses where the student goes
+     * @param enrolledKurse Kurse, wo der Student eingeschrieben ist
      */
     public void setEnrolledKurse(List<Kurs> enrolledKurse) {
         this.enrolledKurse = enrolledKurse;
@@ -59,8 +56,8 @@ public class Student extends Person {
     @Override
     public String toString() {
         return "Student{" +
-                "name='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
+                "Nachname='" + lastName + '\'' +
+                ", Vorname='" + firstName + '\'' +
                 ", studentId=" + studentId +
                 ", totalCredit=" + totalCredit +
                 '}';

@@ -2,9 +2,6 @@ package main.model;
 
 import java.util.List;
 
-/**
- * @author sncam
- */
 public class Professor extends Person {
 
     public long professorId;
@@ -17,34 +14,34 @@ public class Professor extends Person {
     }
 
     /**
-     * @return teacher id
+     * @return professor id
      */
     public long getProfessorId() {
         return professorId;
     }
 
     /**
-     * @return courses
+     * @return Kurse
      */
     public List<Kurs> getKurse() {
         return kurse;
     }
 
     /**
-     * @param kurse courses taught by the teacher
+     * @param kurse Kurse gelehrt von dem Professor
      */
     public void setKurse(List<Kurs> kurse) {
         this.kurse = kurse;
     }
 
     /**
-     * @return tostring
+     * @return toString
      */
     @Override
     public String toString() {
-        return "Teacher{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
+        return "Professor{" +
+                "Nachname='" + lastName + '\'' +
+                ", Vorname='" + firstName + '\'' +
                 '}';
     }
 }

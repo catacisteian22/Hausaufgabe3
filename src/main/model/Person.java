@@ -1,8 +1,5 @@
 package main.model;
 
-/**
- * @author sncam
- */
 public class Person {
 
     public String firstName;
@@ -21,7 +18,7 @@ public class Person {
     }
 
     /**
-     * @param lastName of the person
+     * @param lastName der Person
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -35,7 +32,7 @@ public class Person {
     }
 
     /**
-     * @param firstName of the person
+     * @param firstName der Person
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
